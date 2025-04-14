@@ -1,10 +1,37 @@
-# AI123.dev WordPress MCP
+# AI123-Blog WordPress MCP
 
-这是AI123.dev博客的WordPress MCP服务，用于实现Cursor编辑器与WordPress博客系统的集成。
+WordPress内容管理控制台（MCP）用于自动发布文章到WordPress站点。
+
+## WordPress设置指南
+
+WordPress站点使用MiniOrange安全插件，需要进行以下设置：
+
+### 1. MiniOrange Bearer令牌认证
+
+由于MiniOrange插件的要求，必须使用Bearer令牌认证：
+
+1. 确保WordPress站点已安装MiniOrange安全/SSO插件
+2. 在`.env`文件中设置正确的JWT_SECRET
+3. 确保该JWT_SECRET与WordPress中MiniOrange插件的设置匹配
+
+```
+JWT_SECRET=您的MiniOrange JWT令牌
+```
+
+### 2. MiniOrange插件免费版限制
+
+当前使用的MiniOrange插件免费版有以下限制：
+
+- 只允许访问标准WordPress REST API端点
+- 必须使用Bearer令牌认证
+- 不支持Basic认证或Application Password认证
+- 自定义API端点（如JWT Auth）无法访问
+
+如需访问更多API功能，可能需要升级到付费版。
 
 ## 功能特性
 
-- 基于JWT认证的WordPress API通信
+- 基于Bearer令牌的WordPress API通信
 - 自动监控文章目录变化
 - 从Markdown转换为WordPress文章
 - 支持文章的分类和标签管理
@@ -47,7 +74,23 @@ npm install
 cp .env.example .env
 ```
 
-编辑`.env`文件，填入正确的WordPress凭据和路径设置。
+编辑`.env`文件，填入正确的WordPress凭据和JWT_SECRET：
+
+```
+# WordPress 站点设置
+WORDPRESS_SITE_URL=https://your-site.com
+WORDPRESS_USERNAME=your_username
+WORDPRESS_PASSWORD=your_password
+
+# JWT 认证设置
+JWT_SECRET=your_jwt_secret
+
+# 文件监控设置
+ARTICLES_DIR=../articles
+CRAFTS_DIR=../articles/crafts
+STAGING_DIR=../articles/staging
+PUBLISHED_DIR=../articles/published
+```
 
 3. 编译TypeScript代码
 
@@ -67,6 +110,12 @@ npm start
 
 ```bash
 npm run dev
+```
+
+### 测试连接
+
+```bash
+npm run test-connection
 ```
 
 ### 文章流程
@@ -102,15 +151,6 @@ status: "draft|published"
 slug: "custom-slug"
 ---
 ```
-
-## 故障排除
-
-如果遇到问题，请检查：
-
-1. WordPress站点的API是否可访问
-2. JWT认证插件是否正确安装和配置
-3. 环境变量是否正确设置
-4. 文件目录权限是否正确
 
 ## 维护和更新
 
