@@ -1,0 +1,169 @@
+{
+  "mcpServers": {
+    "wordpress": {
+      "command": "node",
+      "args": ["build/index.js"],
+      "env": {
+        "WORDPRESS_SITE_URL": "https://ai123.dev",
+        "WORDPRESS_USERNAME": "AI123DEV",
+        "WORDPRESS_PASSWORD": "dFvpEGGd7)g@yOFF(y"
+      },
+      "methods": [
+        {
+          "name": "create_post",
+          "description": "创建一个新的 WordPress 文章",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "title": {
+                "type": "string",
+                "description": "文章标题"
+              },
+              "content": {
+                "type": "string",
+                "description": "文章内容"
+              },
+              "status": {
+                "type": "string",
+                "enum": ["draft", "publish", "private"],
+                "default": "draft",
+                "description": "文章状态"
+              },
+              "categories": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "分类 ID 列表"
+              },
+              "tags": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "标签 ID 列表"
+              }
+            },
+            "required": ["title", "content"]
+          }
+        },
+        {
+          "name": "get_posts",
+          "description": "获取 WordPress 文章列表",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "perPage": {
+                "type": "number",
+                "default": 10,
+                "description": "每页文章数量"
+              },
+              "page": {
+                "type": "number",
+                "default": 1,
+                "description": "页码"
+              },
+              "search": {
+                "type": "string",
+                "description": "搜索关键词"
+              },
+              "categories": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "分类 ID 列表"
+              },
+              "tags": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "标签 ID 列表"
+              }
+            }
+          }
+        },
+        {
+          "name": "update_post",
+          "description": "更新 WordPress 文章",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "postId": {
+                "type": "number",
+                "description": "文章 ID"
+              },
+              "title": {
+                "type": "string",
+                "description": "文章标题"
+              },
+              "content": {
+                "type": "string",
+                "description": "文章内容"
+              },
+              "status": {
+                "type": "string",
+                "enum": ["draft", "publish", "private"],
+                "description": "文章状态"
+              },
+              "categories": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "分类 ID 列表"
+              },
+              "tags": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "标签 ID 列表"
+              }
+            },
+            "required": ["postId"]
+          }
+        },
+        {
+          "name": "get_categories",
+          "description": "获取 WordPress 分类列表",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "perPage": {
+                "type": "number",
+                "default": 100,
+                "description": "每页分类数量"
+              },
+              "page": {
+                "type": "number",
+                "default": 1,
+                "description": "页码"
+              }
+            }
+          }
+        },
+        {
+          "name": "get_tags",
+          "description": "获取 WordPress 标签列表",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "perPage": {
+                "type": "number",
+                "default": 100,
+                "description": "每页标签数量"
+              },
+              "page": {
+                "type": "number",
+                "default": 1,
+                "description": "页码"
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+} 
