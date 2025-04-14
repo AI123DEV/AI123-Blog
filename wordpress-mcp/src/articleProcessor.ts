@@ -34,8 +34,13 @@ export class ArticleProcessor {
 
   /**
    * 根据文章前置元数据处理分类
+   * 注：当前已禁用自动创建分类功能，请在WordPress后台手动管理分类
    */
   static async processCategories(frontMatter: ArticleFrontMatter): Promise<number[]> {
+    console.log('分类处理已禁用，请在WordPress后台手动管理分类');
+    return [];
+    
+    /*
     const categoryIds: number[] = [];
     
     // 处理单个category字段
@@ -63,12 +68,18 @@ export class ArticleProcessor {
     }
     
     return categoryIds;
+    */
   }
 
   /**
    * 根据文章前置元数据处理标签
+   * 注：当前已禁用自动创建标签功能，请在WordPress后台手动管理标签
    */
   static async processTags(frontMatter: ArticleFrontMatter): Promise<number[]> {
+    console.log('标签处理已禁用，请在WordPress后台手动管理标签');
+    return [];
+    
+    /*
     const tagIds: number[] = [];
     
     if (frontMatter.tags && Array.isArray(frontMatter.tags)) {
@@ -83,6 +94,7 @@ export class ArticleProcessor {
     }
     
     return tagIds;
+    */
   }
 
   /**
@@ -94,7 +106,7 @@ export class ArticleProcessor {
     // 将Markdown内容转换为HTML
     const htmlContent = this.convertMarkdownToHtml(content);
     
-    // 处理分类和标签
+    // 处理分类和标签（当前已禁用自动创建）
     const categoryIds = await this.processCategories(frontMatter);
     const tagIds = await this.processTags(frontMatter);
     
@@ -110,8 +122,9 @@ export class ArticleProcessor {
       content: htmlContent,
       status,
       excerpt: frontMatter.excerpt,
-      categories: categoryIds.length > 0 ? categoryIds : undefined,
-      tags: tagIds.length > 0 ? tagIds : undefined,
+      // 分类和标签已禁用自动创建，需在WordPress后台手动管理
+      // categories: categoryIds.length > 0 ? categoryIds : undefined,
+      // tags: tagIds.length > 0 ? tagIds : undefined,
       slug: frontMatter.slug
     };
     

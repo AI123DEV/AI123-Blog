@@ -34,7 +34,7 @@ JWT_SECRET=您的MiniOrange JWT令牌
 - 基于Bearer令牌的WordPress API通信
 - 自动监控文章目录变化
 - 从Markdown转换为WordPress文章
-- 支持文章的分类和标签管理
+- ~~支持文章的分类和标签管理~~ (当前已禁用，需在WordPress后台手动管理)
 - 自动处理文章状态流转
 
 ## 文件结构
@@ -124,6 +124,7 @@ npm run test-connection
 2. 文章准备好后，将其移动到`articles/staging/`目录
 3. 文件监控服务会自动检测新增的文件，处理并发布到WordPress
 4. 发布成功后，文件会被移动到`articles/published/`目录
+5. **注意**：文章分类和标签功能已禁用，需要在WordPress后台手动编辑文章，添加相应的分类和标签
 
 ## Cursor集成
 
@@ -142,9 +143,9 @@ npm run test-connection
 title: "文章标题"
 author: "作者姓名"
 date: "YYYY-MM-DD"
-category: "分类"
-categories: ["分类1", "分类2"]
-tags: ["标签1", "标签2", "标签3"]
+category: "分类"          # 当前已禁用自动分类，需手动在WordPress后台设置
+categories: ["分类1", "分类2"]  # 当前已禁用自动分类，需手动在WordPress后台设置
+tags: ["标签1", "标签2", "标签3"]  # 当前已禁用自动标签，需手动在WordPress后台设置
 featuredImage: "/path/to/featured/image.jpg"
 excerpt: "文章摘要"
 status: "draft|published"
