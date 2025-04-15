@@ -6,8 +6,10 @@ category: "分类"
 tags: ["标签1", "标签2", "标签3"]
 featuredImage: "/path/to/featured/image.jpg"
 excerpt: "文章摘要，简短描述文章的内容和核心要点"
-status: "draft|published"
+status: "draft"
 ---
+
+<!-- 注意：默认请将新文章保存在articles/crafts/目录下 -->
 
 # 文章标题
 
@@ -35,8 +37,8 @@ status: "draft|published"
 
 ---
 
-## 相关链接
+## 相关资源
 
-- [链接标题1](URL1)
-- [链接标题2](URL2)
-- [链接标题3](URL3) 
+- [资源链接1](URL1)
+- [资源链接2](URL2)
+- [资源链接3](URL3) 
